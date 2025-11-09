@@ -2,14 +2,14 @@
 using namespace std;
 int main()
 {
-    int arr[8]={2,5,6,70,89,54,34};
+    int arr[8]={1,2,3,4,5,6,7};
     int size=7;
     int element,pos,i;
-    cout<<"enter position and element ";
+    cout<<"enter postion and element ";
     cin>>pos;
     cin>>element;
 
-    if(pos<=size &&  pos>=0){
+    if(pos<=size && pos>=0){
         for(i=size;i>pos;i--){
             arr[i]=arr[i-1];
         }
@@ -18,9 +18,8 @@ int main()
         for(i=0;i<size;i++){
             cout<<arr[i]<<" ";
         }
-    }
-    else{
-        cout<<"invalid postion";
+    }else{
+        cout<<"invalid paramenter";
     }
     return 0;
 }
