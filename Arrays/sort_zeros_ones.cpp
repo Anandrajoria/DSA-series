@@ -74,9 +74,8 @@ void sortZerosTwoPointer(vector<int> &v)
 
     while(left < right){
         if(v[left] == 1 && v[right] == 0){
-            swap(v[left], v[right]);
-            left++;
-            right--;
+            v[left++]=0;
+             v[right--]=1;
         }
         else if(v[left] == 0){
             left++;
