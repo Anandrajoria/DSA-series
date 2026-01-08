@@ -98,9 +98,9 @@ int main()
 
     k = k % n2;
 
-    reverseArray(arr2, 0, n2 - 1);   // Step 1
-    reverseArray(arr2, 0, k - 1);    // Step 2
-    reverseArray(arr2, k, n2 - 1);   // Step 3
+    reverseArray(arr2, 0, n2 - 1);   // 5 4 3 2 1
+    reverseArray(arr2, 0, k - 1);    // 4 5 3 2 1
+    reverseArray(arr2, k, n2 - 1);   // 4 5 1 2 3
 
     cout << "Method 2 (Reverse Method)\n";
     cout << "Original array: ";
