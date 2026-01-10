@@ -1,188 +1,209 @@
-// #include<iostream>
-// #include<vector>
-// using namespace std;
-// int main()
-// {
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <cmath>
+using namespace std;
 
-//     // given two vectors of size m and n sorted in increasing order merge them into single sorted array of size m+n;
+/*
+====================================================
+ARRAY & TWO POINTER – IMPORTANT INTERVIEW PROBLEMS
+====================================================
 
-//     // return the maximum number of consecutive 1's in the array
+PLATFORM REFERENCES:
+----------------------------------------------------
+1) Maximum Consecutive Ones
+   - LeetCode 485: Max Consecutive Ones
 
-//     vector<int> v={1,0,1,1,0,1};
+2) Merge Two Sorted Arrays
+   - LeetCode 88: Merge Sorted Array
 
-//     int currentCount=0;
-//     int maxCount=0;
+3) Two Sum (Sorted Array)
+   - LeetCode 167: Two Sum II - Input Array Is Sorted
 
+4) Count Pairs with Given Difference
+   - LeetCode 532: K-diff Pairs in an Array
 
-//     for(int i=0;i<v.size();i++){
-//         if(v[i]==1){
-//             currentCount++;
-//             maxCount=max(maxCount,currentCount);
-//         }else if(v[i]==0){
-//             currentCount=0;
-//         }
-//     }
+5) Squares of a Sorted Array
+   - LeetCode 977: Squares of a Sorted Array
 
-// cout<<maxCount;
-//     return 0;
-// }
-
-// ! another question
-
-
-// #include<iostream>
-// #include<vector>
-// using namespace std;
-// void merge(vector<int>&nums1,int m,vector<int>&nums2,int n){
-
-//     int i=m-1;
-//     int j=n-1;
-//     int k=m+n-1;
-
-//     while(i>=0 && j>=0){
-//         if(nums1[i]>nums2[j]){
-//             nums1[k]=nums1[i];
-//             i--;
-//         }else{
-//             nums1[k]=nums2[j];
-//             j--;
-//         }
-//         k--;
-//     }
-
-//     while(j>=0){
-//         nums1[k]=nums2[j];
-//         j--;
-//         k--;
-//     }
+----------------------------------------------------
+All problems are solved using:
+- Arrays / Vectors
+- Two Pointer Technique
+====================================================
+*/
 
 
-// }
-// int main()
-// {
-//     vector<int> arr1={1,2,3,0,0,0,0,0};
-//     vector<int> arr2={1,2,3,4,5};
+// ----------------------------------------------------
+// 1. Maximum Consecutive Ones
+// ----------------------------------------------------
+int maxConsecutiveOnes(vector<int>& v)
+{
+    int currentCount = 0;
+    int maxCount = 0;
 
-    
-//     merge(arr1,3,arr2,5);
-
-//     for(int x : arr1) {
-//         cout << x << " ";
-//     }
-
-
-//     return 0;
-// }
-
-
-//! another question
-
-// #include<iostream>
-// #include<vector>
-// using namespace std;
-// vector<int> twoSum(vector<int>&arr, int target){
-//     int i=0;
-//     int j=arr.size()-1;
-//     vector<int> res;
-//     while(i<j){
-//         if(arr[i]+arr[j]==target){
-//             return {i+1, j+1};
-//             break;
-//         }
-//         else if(arr[i]+arr[j]<target){
-//             i++;
-//         }else j--;
-//     }
-//     return {};
-// }
-// int main()
-// {
-//         vector<int> arr={0,-2,-1,0,3,6,8,11,12};
-
-//         int target=14;
-
-//     vector<int>res=twoSum(arr,target);
-//     if(!res.empty()){
-//         cout<<res[0]<<" "<<res[1];
-//     }else{
-//         cout<<"no pair found";
-//     }
-//     return 0;
-// }
+    for(int i = 0; i < v.size(); i++){
+        if(v[i] == 1){
+            currentCount++;
+            maxCount = max(maxCount, currentCount);
+        } else {
+            currentCount = 0;
+        }
+    }
+    return maxCount;
+}
 
 
-// ! another question
+// ----------------------------------------------------
+// 2. Merge Two Sorted Arrays (nums1 has extra space)
+// ----------------------------------------------------
+void mergeSortedArrays(vector<int>& nums1, int m,
+                        vector<int>& nums2, int n)
+{
+    int i = m - 1, j = n - 1, k = m + n - 1;
 
-// #include<iostream>
-// #include<cstdlib>
-// #include<vector>
-// #include <algorithm>
-// using namespace std;
+    while(i >= 0 && j >= 0){
+        if(nums1[i] > nums2[j]){
+            nums1[k--] = nums1[i--];
+        } else {
+            nums1[k--] = nums2[j--];
+        }
+    }
 
-// int findPair(vector<int>&nums,int k){
-//     sort(nums.begin(),nums.end());
-//     int i=0;
-//     int j=1;
-//     int res=0;
-//     while(j<nums.size()){
-//         if(nums[j]-nums[i]==k){
-//             res++;
-//             i++;
-//             j++;
-//             while (j<nums.size() && nums[j]==nums[j-1])
-//             {
-//                 j++;
-//             }
-            
-//         }else if(nums[j]-nums[i]<k){
-//             j++;
-//         }else i++;
-//         if(i==j) j++;
-//     }
-//     return res;
-// }
-// int main()
-// {
-//     vector<int>arr={1,2,4,4,3,3,0,9,2,3};
-//     int k=3;
-
-//     cout<<findPair(arr,k);
-//     return 0;
-// }
+    while(j >= 0){
+        nums1[k--] = nums2[j--];
+    }
+}
 
 
+// ----------------------------------------------------
+// 3. Two Sum (Sorted Array) – Count Pairs
+// ----------------------------------------------------
+int countTwoSumPairs(vector<int>& arr, int target)
+{
+    int i = 0, j = arr.size() - 1;
+    int count = 0;
 
-// ! new question
-
-// #include<iostream>
-// #include<vector>
-// using namespace std;
-// int main()
-// {
-//     vector<int> arr={-5,-4,-1,2,6};
-//     int n=arr.size();
-
-//     vector<int>res(n);
-//     int i=0;
-//     int j=n-1;
-//     int k=n-1;
-
-//     while(i<=j){
-//         if(abs(arr[i])>abs(arr[j])){
-//             res[k]=arr[i]*arr[i];
-//             i++;
-            
-//         }else{
-//             res[k]=arr[j]*arr[j];
-//             j--;
-            
-//         }
-//         k--;
-//     }
-//     for(int x : res){
-//         cout<<x<<" ";
-//     }
-//     return 0;
-// }
+    while(i < j){
+        int sum = arr[i] + arr[j];
+        if(sum == target){
+            count++;
+            i++;
+            j--;
+        }
+        else if(sum < target){
+            i++;
+        } else {
+            j--;
+        }
+    }
+    return count;
+}
 
 
+// ----------------------------------------------------
+// 4. Count Pairs with Difference = k
+// ----------------------------------------------------
+int countPairsWithDiff(vector<int>& nums, int k)
+{
+    sort(nums.begin(), nums.end());
+    int i = 0, j = 1, count = 0;
+
+    while(j < nums.size()){
+        int diff = nums[j] - nums[i];
+        if(diff == k){
+            count++;
+            i++;
+            j++;
+            while(j < nums.size() && nums[j] == nums[j - 1])
+                j++;
+        }
+        else if(diff < k){
+            j++;
+        }
+        else {
+            i++;
+        }
+        if(i == j) j++;
+    }
+    return count;
+}
+
+
+// ----------------------------------------------------
+// 5. Squares of a Sorted Array
+// ----------------------------------------------------
+vector<int> sortedSquares(vector<int>& arr)
+{
+    int n = arr.size();
+    vector<int> res(n);
+    int i = 0, j = n - 1, k = n - 1;
+
+    while(i <= j){
+        if(abs(arr[i]) > abs(arr[j])){
+            res[k--] = arr[i] * arr[i];
+            i++;
+        } else {
+            res[k--] = arr[j] * arr[j];
+            j--;
+        }
+    }
+    return res;
+}
+
+
+int main()
+{
+    cout << "=========== ARRAY & TWO POINTER PROBLEMS ===========\n\n";
+
+    // ------------------------------------------------
+    // Problem 1: Max Consecutive Ones
+    // ------------------------------------------------
+    vector<int> ones = {1, 0, 1, 1, 0, 1};
+    cout << "Max Consecutive Ones: "
+         << maxConsecutiveOnes(ones) << "\n\n";
+
+
+    // ------------------------------------------------
+    // Problem 2: Merge Sorted Arrays
+    // ------------------------------------------------
+    vector<int> a = {1, 2, 3, 0, 0, 0};
+    vector<int> b = {2, 5, 6};
+    mergeSortedArrays(a, 3, b, 3);
+
+    cout << "Merged Sorted Array: ";
+    for(int x : a) cout << x << " ";
+    cout << "\n\n";
+
+
+    // ------------------------------------------------
+    // Problem 3: Two Sum (Count Pairs)
+    // ------------------------------------------------
+    vector<int> ts = {1, 2, 3, 4, 6};
+    int target = 7;
+    cout << "Two Sum Pair Count: "
+         << countTwoSumPairs(ts, target) << "\n\n";
+
+
+    // ------------------------------------------------
+    // Problem 4: Count Pairs with Difference K
+    // ------------------------------------------------
+    vector<int> diffArr = {1, 2, 4, 4, 3, 3, 0, 9, 2, 3};
+    int k = 3;
+    cout << "Pairs with difference " << k << ": "
+         << countPairsWithDiff(diffArr, k) << "\n\n";
+
+
+    // ------------------------------------------------
+    // Problem 5: Sorted Squares
+    // ------------------------------------------------
+    vector<int> sq = {-5, -4, -1, 2, 6};
+    vector<int> sqRes = sortedSquares(sq);
+
+    cout << "Sorted Squares Array: ";
+    for(int x : sqRes) cout << x << " ";
+    cout << "\n\n";
+
+    cout << "=========== END OF PROGRAM ===========\n";
+    return 0;
+}
